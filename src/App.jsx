@@ -5,6 +5,10 @@ import ChatBubble from "./ChatBubble";
 
 function App() {
 
+  const apiURL = import.meta.env.VITE_BACKEND_URL || '/api'
+  
+  console.log(apiURL)
+
   const [messages, setMessages] = useState([])
 
   async function handleSubmit(e) {
@@ -15,7 +19,7 @@ function App() {
     setMessages(prevMessages => [...prevMessages, { type: 'user', content: userInput }])
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${apiURL}/chat`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
